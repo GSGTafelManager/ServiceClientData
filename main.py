@@ -74,7 +74,7 @@ def execute(command):
                 chrome_options.add_argument("--start-fullscreen");
             service = webdriver.chrome.service.Service(driver_path)
             service.creationflags = subprocess.CREATE_NO_WINDOW
-            driver = webdriver.Chrome(executable_path=driver_path, service=service, chrome_options=chrome_options)
+            driver = webdriver.Chrome(executable_path=driver_path, service=service, options=chrome_options)
             driver.get(command["url"])
             try:
                 driver.switch_to.window(driver.window_handles[0])
