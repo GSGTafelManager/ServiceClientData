@@ -76,7 +76,6 @@ def execute(command):
             service.creationflags = subprocess.CREATE_NO_WINDOW
             driver = webdriver.Chrome(executable_path=driver_path, service=service, chrome_options=chrome_options)
             driver.get(command["url"])
-            return ""
             try:
                 driver.switch_to.window(driver.window_handles[0])
             except:
