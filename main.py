@@ -89,6 +89,7 @@ def execute(command):
         elif command["exec"] == "os":
             os.system(command["code"])
     except Exception as e:
+        print(e)
         sentry_sdk.capture_exception(e)
 
 while True:
