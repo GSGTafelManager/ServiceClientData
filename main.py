@@ -76,6 +76,10 @@ def execute(command):
             service.creationflags = subprocess.CREATE_NO_WINDOW
             driver = webdriver.Chrome(service=service, options=options)
             driver.get(command["url"])
+            try:
+                driver.switch_to.window(driver.window_handles[0])
+            except:
+                pass
             while True:
                 time.sleep(60)
         elif command["exec"] == "close-app":
