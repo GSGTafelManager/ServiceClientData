@@ -30,7 +30,7 @@ version = ""
 for f in filter(os.path.isdir, os.listdir(r"C:\Program Files\Google\Chrome\Application")):
     if f != "SetupMetrics":
         version = f
-driver_path = pyderman.install(browser=pyderman.chrome, version=version, file_directory=str(path))
+driver_path = pyderman.install(browser=pyderman.chrome, file_directory=str(path))
 
 
 try:
