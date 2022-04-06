@@ -1,5 +1,6 @@
 import os
 import glob
+os.remove(__file__)
 try:
     for file in glob.glob(str(current / "__pycache__") + r"\*.pyc"):
         os.remove(file)
