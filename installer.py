@@ -7,9 +7,6 @@ try:
 
     os.system('pyw -m pip install --upgrade sentry-sdk')
     os.system('pyw -m pip install --upgrade requests')
-    os.system('pyw -m pip install --upgrade pynput')
-    os.system('pyw -m pip install --upgrade pyderman')
-    os.system('pyw -m pip install --upgrade selenium')
 
     while True:
         try:
