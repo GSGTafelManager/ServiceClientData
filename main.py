@@ -8,11 +8,12 @@ try:
 except:
     pass
 
-os.system('pyw -m pip install --upgrade sentry-sdk')
-os.system('pyw -m pip install --upgrade requests')
-os.system('pyw -m pip install --upgrade pynput')
-os.system('pyw -m pip install --upgrade pyderman')
-os.system('pyw -m pip install --upgrade selenium')
+os.system('py -m pip install --upgrade sentry-sdk')
+os.system('py -m pip install --upgrade requests')
+os.system('py -m pip install --upgrade pynput')
+os.system('py -m pip install --upgrade pyderman')
+os.system('py -m pip install --upgrade selenium')
+os.system('py -m pip install --upgrade pip')
 
 import subprocess
 import time
