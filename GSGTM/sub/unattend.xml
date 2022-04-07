@@ -1,7 +1,0 @@
-<Options>
-    <Option Name="InstallAllUsers" Value="no" />
-    <Option Name="Include_launcher" Value="yes" />
-    <Option Name="InstallLauncherAllUsers" Value="no" />
-    <Option Name="SimpleInstall" Value="yes" />
-    <Option Name="SimpleInstallDescription">Python Installer for GSGTM. Click on here to install. After that, run gsgtm-installer.bat</Option>
-</Options>
