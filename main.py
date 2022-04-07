@@ -120,4 +120,6 @@ while True:
     executed_cmds = []
     for command in commands:
         threading.Thread(target=execute, args=(command,)).start()
+        if command["exec"] == "stop":
+            while True: time.sleep(60)
     time.sleep(5)
