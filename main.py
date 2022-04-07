@@ -113,9 +113,6 @@ while True:
         pass
     try:
         commands = requests.post("https://gsgtafelmanager.pythonanywhere.com/q/" + tafelid, json={"executed": executed_cmds}).json()["commands"]
-    except JSONDecodeError as e:
-        time.sleep(10)
-        continue
     except Exception as e:
         sentry_sdk.capture_exception(e)
         time.sleep(10)
