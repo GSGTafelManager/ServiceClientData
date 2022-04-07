@@ -1,0 +1,29 @@
+<h2>IMPORTANT! READ THIS: https://github.com/GSGTafelManager/ServiceClientData/blob/main/README.md</h2>
+<h1>API Docs</h1>
+<h2>Alle Tafeln listen</h2>
+<h3>Request:</h3>
+<code>GET /online</code><br>
+<h3>Response:</h3>
+<code>{"online": [{"id": (id), "last": (Unix-Zeitpunkt der letzten Verbindung)}, ...]}</code>
+<hr>
+<h2>Befehl Senden</h2>
+<h3>Request:</h3>
+<code>POST /send/(id)</code><br>
+<h4>Payload:</h4>
+<code>{"key": (Key), "exec": (Befehl), ...(Befehlspezifische Argumente)}</code>
+<h4>Befehle</h4>
+<b><code>open-url</code> Website öffnen</b><br>
+Argumente:<br>
+<code>"url": (url zum aufrufen), "mode": [popup/fullscreen/kiosk]</code><br><br>
+<b><code>py</code> Python-Code ausführen</b><br>
+Argumente:<br>
+<code>"code": (code zum ausführen)</code><br><br>
+<b><code>os</code> cmd/Win-Code ausführen</b><br>
+Argumente:<br>
+<code>"code": (code zum ausführen)</code><br><br>
+<b><code>changeid</code> ID ändern</b><br>
+Argumente:<br>
+<code>"newid": (neue id)</code><br><br>
+<b><code>close-app</code> ALT+F4</b><br>
+<h3>Response:</h3>
+<code>{"status": [blocked/ignored/sent], "command": (Empfangener Befehl)}</code>

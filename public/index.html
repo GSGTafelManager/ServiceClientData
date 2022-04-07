@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GSGTafelManager</title>
+    <script src="/backend.js"></script>
+    <script src="https://js.sentry-cdn.com/40b3614f81004ba590229b1908623646.min.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div id="message">
+      <h1>Select device</h1>
+      <h2>IMPORTANT! READ THIS: https://github.com/GSGTafelManager/ServiceClientData/blob/main/README.md</h2>
+      <ul id="online">Loading...</ul>
+      <script>
+        output = document.getElementById("online")
+        online_devices = []
+        setInterval(async function() {
+          for (var device of online_devices) {
+            ago = (Date.now() / 1000 - parseFloat(device["last"])).toFixed(1)
+            document.getElementById("ago-" + device["id"]).innerText = ago.toString()
+          }
+        }, 80)
+        setInterval(async function() {
+          online_devices = (await list_online())["online"]
+          new_html = ""
+          for (var device of online_devices) {
+            ago = (Date.now() / 1000 - parseFloat(device["last"])).toFixed(1)
+            new_html += '<li><a href="/send.html?device=' + device["id"] + '">Device "' + device["id"] + '"</a> - <span id="ago-' + device["id"] + '">' + ago + '</span> sec ago.</li>'
+          }
+          output.innerHTML = new_html
+        }, 800)
+      </script>
+    </div>
+  </body>
+</html>
