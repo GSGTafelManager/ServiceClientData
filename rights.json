@@ -1,0 +1,28 @@
+{
+    "users": [
+        {
+            "prefixes": ["fx", "fl", "setup"],
+            "key": "fxTM1123"
+        },
+        {
+            "prefixes": ["pt", "pr", "setup"],
+            "key": "ptTM6645"
+        },
+        {
+            "prefixes": ["jn", "jl", "gsg", "setup"],
+            "key": "jnTM7878"
+        },
+        {
+            "prefixes": ["ja", "jh", "jtd", "root", "test", "gsg", "setup"],
+            "key": "jhTM3443"
+        },
+        {
+            "prefixes": ["pl", "pd", "test", "gsg", "setup"],
+            "key": "plTM2234"
+        },
+        {
+            "prefixes": ["setup", "root", "test", "gsg"],
+            "key": "SETUP1234"
+        }
+    ]
+}
